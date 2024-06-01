@@ -32,12 +32,14 @@ npm install -r package.json
 ## Commit commmant and description
 
 -------------------------------------------
-  |---|---|
-  |PL|Pull Request|
-  |Issue|For any kind of Issue |
-  |Solve| Issue Solved |
-  |Create|For Creating an Issue|
-  |Merge|For Merge your Commit|
+  | Key   | Description            |
+|-------|------------------------|
+| PL    | Pull Request           |
+| Issue | For any kind of Issue  |
+| Solve | Issue Solved           |
+| Create| For Creating an Issue  |
+| Merge | For Merge your Commit  |
+
 ----------------------------------
 
 
