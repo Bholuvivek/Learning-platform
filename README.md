@@ -29,7 +29,7 @@ npm install -r package.json
 - After Contribution whatever you want to change change it and give to readable comment.
 
 
-## Commit commmant and description
+## Commit commmand and description
 
 -------------------------------------------
   | Key   | Description            |
