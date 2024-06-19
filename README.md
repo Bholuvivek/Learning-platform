@@ -42,6 +42,8 @@ npm install -r package.json
 
 ----------------------------------
 
+ass soon as posible adding fronttend
+
 
 
 ##### Thank you for your Contrinbution and feel free to connect me
