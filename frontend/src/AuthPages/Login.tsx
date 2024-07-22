@@ -33,12 +33,12 @@ const Login = () => {
   const onSubmitHandler = (e:FormEvent<HTMLElement>) => {
     e.preventDefault();
 
-    const staticUsername:string = "test";
-    const staticPassword:string = "test@123";
+    const staticUsername:string = "superadmin";
+    const staticPassword:string = "Admin@123";
     const data = formData
     if (data) {
         if (data.username === staticUsername && data.password ===staticPassword) {
-          actions.auth.setTokens(data.username, data.password);
+          actions.auth.setTokens(data.username, data.password,);
            navigate('/app/home');
         }
         else{

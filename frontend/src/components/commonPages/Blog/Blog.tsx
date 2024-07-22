@@ -22,11 +22,23 @@ const Blog: React.FC = () => {
   const handleAddPost = () => {
     const timestamp = new Date().toISOString();
     if (editMode && currentId !== null) {
-      actions.auth.updateBlog({ id: currentId, title, content, image, createdAt: timestamp, likes: 0 });
+      actions.auth.updateBlog({
+        id: currentId, title, content, image, createdAt: timestamp, likes: 0,
+        author: {
+          username: '',
+          avatar: undefined
+        }
+      });
       setEditMode(false);
       setCurrentId(null);
     } else {
-      actions.auth.addBlog({ id: Date.now(), title, content, image, createdAt: timestamp, likes: 0 });
+      actions.auth.addBlog({
+        id: Date.now(), title, content, image, createdAt: timestamp, likes: 0,
+        author: {
+          username: '',
+          avatar: undefined
+        }
+      });
     }
     setTitle('');
     setContent('');

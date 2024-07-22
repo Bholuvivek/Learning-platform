@@ -24,7 +24,7 @@ const pages = [
   },
   {
     name: 'Learning Hub',
-    link: 'device-type'
+    link: 'learning-hub'
   },
   {
     name: 'Dashboard',

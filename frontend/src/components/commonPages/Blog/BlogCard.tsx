@@ -49,18 +49,17 @@ const BlogCard: React.FC = () => {
       <Grid container spacing={2} mt={2}>
         {blogs.map((blog) => (
           <Grid item key={blog.id} xs={12} sm={6} md={4}>
-          
-            <Card sx={{ cursor: 'pointer' }} onClick={() => handleReadMore(blog.id)}>
+            <Card sx={{ cursor: 'pointer', maxHeight:'17rem' }} onClick={() => handleReadMore(blog.id)}>
               <CardContent>
                 <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
-                  <Avatar src={'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=626&ext=jpg&ga=GA1.1.1561295272.1694592742&semt=ais_user'} alt='vivek' sx={{ mr: 2 }} />
-                  <Box>
+                <Avatar src={'https://img.freepik.com/free-psd/3d-illustration-human-avatar-profile_23-2150671142.jpg?size=626&ext=jpg&ga=GA1.1.1561295272.1694592742&semt=ais_user'} alt='vivek' sx={{ mr: 2 }} />
+                                    <Box>
                     <Typography variant="subtitle1">Vivek Bholu</Typography>
-                    {/* <Typography variant="caption">{moment(blog.createdAt).fromNow()}</Typography> */}
+                    <Typography variant="caption">{moment(blog.createdAt).fromNow()}</Typography>
                   </Box>
                 </Box>
                 <Typography variant="h5">{blog.title}</Typography>
-                <Typography variant="body2">{blog.content}</Typography>
+                <Typography variant="body2" sx={{maxHeight:'4rem', overflow:'hidden'}} dangerouslySetInnerHTML={{ __html: blog.content }} />
               </CardContent>
               <CardActions>
                 <IconButton onClick={(e) => handleLike(blog.id, e)}><ThumbUp /></IconButton>

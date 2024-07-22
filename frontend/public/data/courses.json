@@ -1,0 +1,25 @@
+
+
+[
+    {
+      "id": 1,
+      "title": "MERN Full Stack",
+      "modules": [
+        {
+          "id": 1,
+          "title": "Frontend",
+          "videos": [
+            { "id": 1, "title": "React Basics", "url": "video1.mp4" }
+          ]
+        },
+        {
+          "id": 2,
+          "title": "Backend",
+          "videos": [
+            { "id": 2, "title": "Node.js Basics", "url": "video2.mp4" }
+          ]
+        }
+      ]
+    }
+  ]
+  

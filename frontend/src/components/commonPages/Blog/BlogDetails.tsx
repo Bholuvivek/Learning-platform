@@ -1,4 +1,4 @@
-// components/BlogDetail.tsx
+
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { Typography, Container, Button } from '@mui/material';

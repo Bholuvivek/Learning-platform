@@ -1,0 +1,106 @@
+[
+    {
+        "id":1,
+      "title": "Introduction to React.js",
+      "type": "Frontend",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-05-15",
+      "readingTime": 15,
+      "description": "This blog provides an introduction to React.js, a popular JavaScript library for building user interfaces. React.js is known for its component-based architecture, which allows developers to create reusable UI components. The blog covers the basics of React.js, including JSX syntax, component rendering, state management using hooks such as useState and useEffect, and handling events. Additionally, it explores advanced topics like context API, routing with React Router, and integrating with third-party libraries like Redux for global state management.",
+      "sampleCode": "import React from 'react';\n\nfunction App() {\n  return (\n    <div>\n      <h1>Hello, React!</h1>\n      <p>Welcome to my React application.</p>\n    </div>\n  );\n}\n\nexport default App;"
+    },
+    {
+        "id":2,
+      "title": "Node.js Backend Development",
+      "type": "Backend",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-06-20",
+      "readingTime": 20,
+      "description": "This blog focuses on Node.js backend development, covering server-side JavaScript programming with Node.js. It starts with setting up a basic Node.js server and handling HTTP requests using Express.js, a popular Node.js framework. The blog also discusses database integration with MongoDB using Mongoose, authentication using JSON Web Tokens (JWT), and securing APIs. Additionally, it explores middleware usage for request processing, error handling, and deploying Node.js applications.",
+      "sampleCode": "const express = require('express');\nconst app = express();\n\napp.get('/', (req, res) => {\n  res.send('Hello, Node.js!');\n});\n\napp.listen(3000, () => {\n  console.log('Server is running on port 3000');\n});"
+    },
+    {
+        "id":3,
+      "title": "Introduction to MongoDB",
+      "type": "Database",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-07-10",
+      "readingTime": 18,
+      "description": "This blog introduces MongoDB, a NoSQL database management system known for its flexibility and scalability. It covers MongoDB basics, such as document-oriented data storage, CRUD operations (Create, Read, Update, Delete), indexing, and aggregation framework for data analysis. The blog also explores schema design considerations, transactions in MongoDB, and integrating MongoDB with Node.js applications using Mongoose.",
+      "sampleCode": "const mongoose = require('mongoose');\nmongoose.connect('mongodb://localhost/mydatabase', { useNewUrlParser: true, useUnifiedTopology: true });\n\nconst Schema = mongoose.Schema;\nconst userSchema = new Schema({\n  name: String,\n  email: String,\n  age: Number\n});\n\nconst User = mongoose.model('User', userSchema);"
+    },
+    {
+        "id":4,
+      "title": "Data Science Techniques: Exploratory Data Analysis",
+      "type": "Data Science",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-08-05",
+      "readingTime": 25,
+      "description": "This blog dives into exploratory data analysis (EDA) techniques used in data science. It covers methods for summarizing data, detecting patterns, and visualizing relationships among variables. Topics include data preprocessing steps like handling missing values, outlier detection, and feature scaling. The blog also demonstrates EDA techniques using Python libraries such as Pandas, Matplotlib, and Seaborn.",
+      "sampleCode": "import pandas as pd\nimport seaborn as sns\n\n# Load dataset\ndf = pd.read_csv('data.csv')\n\n# Summary statistics\nprint(df.describe())\n\n# Data visualization\nsns.pairplot(df, hue='target')"
+    },
+    {
+        "id":5,
+      "title": "Machine Learning Basics: Linear Regression",
+      "type": "Data Science",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-09-05",
+      "readingTime": 28,
+      "description": "An introductory guide to machine learning, covering basic concepts, algorithms, and implementation using popular machine learning libraries and frameworks. The blog focuses on linear regression, a fundamental supervised learning technique for predicting numerical values based on input features. It discusses model assumptions, training process, evaluating model performance, and interpreting regression coefficients.",
+      "sampleCode": "from sklearn.linear_model import LinearRegression\nfrom sklearn.model_selection import train_test_split\n\n# Load dataset\nX_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)\n\n# Train the model\nmodel = LinearRegression()\nmodel.fit(X_train, y_train)\n\n# Predictions\npredictions = model.predict(X_test)"
+    },
+    {
+        "id":6,
+      "title": "Advanced CSS Techniques for Responsive Design",
+      "type": "Frontend",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-03-15",
+      "readingTime": 22,
+      "description": "This blog covers advanced CSS techniques for creating responsive web designs. It includes the use of media queries, flexible grid layouts, and modern CSS frameworks like Flexbox and CSS Grid. The blog explains how to create fluid layouts that adapt to different screen sizes, improve user experience, and enhance mobile responsiveness. It also provides tips for optimizing CSS performance and maintaining clean, organized stylesheets.",
+      "sampleCode": "/* Example CSS for a responsive grid layout */\n.container {\n  display: grid;\n  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));\n  gap: 16px;\n}\n\n.item {\n  background-color: #f4f4f4;\n  padding: 16px;\n  text-align: center;\n}"
+    },
+    {
+        "id":7,
+      "title": "Building RESTful APIs with Express.js",
+      "type": "Backend",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-04-22",
+      "readingTime": 30,
+      "description": "This blog provides a comprehensive guide to building RESTful APIs with Express.js, a powerful Node.js framework. It covers essential concepts like routing, middleware, and handling HTTP methods (GET, POST, PUT, DELETE). The blog also discusses best practices for designing RESTful APIs, such as resource naming conventions, versioning, and error handling. Additionally, it includes examples of connecting to databases, implementing authentication, and deploying the API.",
+      "sampleCode": "const express = require('express');\nconst app = express();\n\napp.use(express.json());\n\nlet items = [];\n\napp.get('/items', (req, res) => {\n  res.json(items);\n});\n\napp.post('/items', (req, res) => {\n  const item = req.body;\n  items.push(item);\n  res.status(201).json(item);\n});\n\napp.listen(3000, () => {\n  console.log('Server is running on port 3000');\n});"
+    },
+    {
+        "id":8,
+      "title": "Understanding GraphQL: A Beginner's Guide",
+      "type": "Backend",
+      "createdBy": {
+        "username": "Bholuvivek",
+        "name": "Vivek Singh"
+      },
+      "createdAt": "2023-02-10",
+      "readingTime": 26,
+      "description": "This blog introduces GraphQL, a query language for APIs that allows clients to request only the data they need. It explains the differences between REST and GraphQL, and how GraphQL can improve API performance and flexibility. The blog covers key concepts like schemas, resolvers, and mutations, and provides a step-by-step guide to setting up a GraphQL server with Node.js and Apollo Server. It also includes examples of querying and mutating data, and handling authentication and authorization.",
+      "sampleCode": "const express = require('express');\nconst app = express();\n\napp.use(express.json());\n\nlet items = [];\n\napp.get('/items', (req, res) => {\n  res.json(items);\n});\n\napp.post('/items', (req, res) => {\n  const item = req.body;\n  items.push(item);\n  res.status(201).json(item);\n});\n\napp.listen(3000, () => {\n  console.log('Server is running on port 3000');\n});"
+   }
+    ]  

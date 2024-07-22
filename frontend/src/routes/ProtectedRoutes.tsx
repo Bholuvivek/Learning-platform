@@ -13,6 +13,16 @@ import Blog from "../components/commonPages/Blog/Blog";
 import BlogCard from "../components/commonPages/Blog/BlogCard";
 import BlogDetail from "../components/commonPages/Blog/BlogDetails";
 import EditBlog from "../components/commonPages/Blog/EditBlog";
+import LearningHubLanding from "../features/leaning-hub/LearningHubLanding";
+import ArticleListCard from "../features/teck-article/ArticleListCard";
+import ArticleDetails from "../features/teck-article/ArticleDetails";
+import NoteForm from "../testing/NoteForm";
+import CourseDetails from "../features/leaning-hub/LearningPage";
+import AdminPanel from "../core/admin-panel/AdminPanel";
+import AddCourse from "../core/admin-panel/component/AddCourse";
+import AddModule from "../core/admin-panel/component/AddModule";
+import EditCourse from "../core/admin-panel/component/EditCourse";
+import EditModule from "../core/admin-panel/component/EditModule";
 
 
 export const AppLayout=()=>{
@@ -107,15 +117,67 @@ export const DefaultRoute = () => {
      
       
       {
-        path: 'device-type',
+        path: 'learning-hub',
         errorElement:<div>Oops there is some error</div>,
-        element: <div>we have this type of device</div>,
+        element: <LearningHubLanding/>
+      },
+      {
+        path: 'new-note',
+        errorElement:<div>Oops there is some error</div>,
+        element: <NoteForm/>
+      },
+      
+      {
+        path: 'article',
+        errorElement:<div>Oops there is some error</div>,
+        element: <ArticleListCard/>
+      },
+      {
+        path: 'course/:id',
+        errorElement:<div>Oops there is some error</div>,
+        element: <CourseDetails/>
+      },
+      {
+        path: 'article/:id',
+        errorElement:<div>Oops there is some error</div>,
+        element: <ArticleDetails/>
       },
       {
         path: 'dashboard',
         errorElement:<div>Oops there is some error</div>,
         element: <UserDashboar/>
       },
+
+      // Admin Panel
+      {
+        path: 'admin/panel',
+        errorElement: <div>Oops, there is some error</div>,
+        element: <AdminPanel />,
+      },
+      // Course Management
+{
+  path: 'admin/courses/add',
+  errorElement: <div>Oops, there is some error</div>,
+  element: <AddCourse />,
+},
+{
+  path: 'admin/courses/edit/:courseId',
+  errorElement: <div>Oops, there is some error</div>,
+  element: <EditCourse />,
+},
+
+// Module Management
+{
+  path: 'admin/courses/:courseId/modules/add',
+  errorElement: <div>Oops, there is some error</div>,
+  element: <AddModule />,
+},
+{
+  path: 'admin/courses/:courseId/modules/edit/:moduleId',
+  errorElement: <div>Oops, there is some error</div>,
+  element: <EditModule />,
+},
+
     ],
 
   },
