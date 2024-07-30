@@ -1,53 +1,30 @@
-// src/components/CourseForm.tsx
+
 import React, { useState } from 'react';
-import { Box, TextField, Button } from '@mui/material';
-import { Course } from '../../types';
-import { createCourse,updateCourse } from '../../../services/api';
+import { Box, Button, TextField } from '@mui/material';
+
 interface CourseFormProps {
-  course?: Course;
-  onClose: () => void;
-  onSuccess: () => void;
+  onSubmit: (courseData: any) => void;
 }
 
-const CourseForm: React.FC<CourseFormProps> = ({ course, onClose, onSuccess }) => {
-  const [title, setTitle] = useState(course?.title || '');
-  const [imageUrl, setImageUrl] = useState(course?.imageUrl || '');
+const CourseForm: React.FC<CourseFormProps> = ({ onSubmit }) => {
+  const [title, setTitle] = useState('');
 
-  const handleSubmit = async () => {
-    try {
-      if (course) {
-        await updateCourse(course._id, { title, imageUrl });
-      } else {
-        await createCourse({ title, imageUrl });
-      }
-      onSuccess();
-    } catch (error) {
-      console.error('Error submitting course form:', error);
-    }
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    onSubmit({ title });
+    setTitle('');
   };
 
   return (
-    <Box>
+    <Box component="form" onSubmit={handleSubmit} mb={3}>
       <TextField
-        label="Title"
-        fullWidth
-        margin="normal"
+        label="Course Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-      />
-      <TextField
-        label="Image URL"
         fullWidth
         margin="normal"
-        value={imageUrl}
-        onChange={(e) => setImageUrl(e.target.value)}
       />
-      <Button onClick={handleSubmit} variant="contained" color="primary">
-        {course ? 'Update Course' : 'Create Course'}
-      </Button>
-      <Button onClick={onClose} variant="outlined" color="secondary">
-        Cancel
-      </Button>
+      <Button type="submit" variant="contained" color="primary">Add Course</Button>
     </Box>
   );
 };

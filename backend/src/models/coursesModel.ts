@@ -3,11 +3,12 @@ import mongoose, { Document, Schema, Model, Types } from 'mongoose';
 export interface IContent {
   topicname: string;
   videoUrl: string;
+  image?: string; // Optional field for image URL or image data
 }
 
 export interface ITopic {
   title: string;
-  content:Types.DocumentArray<IContent | any[]>;
+  content: Types.DocumentArray<IContent>;
 }
 
 export interface IModule {
@@ -22,7 +23,8 @@ export interface ICourse extends Document {
 
 const ContentSchema = new Schema<IContent>({
   topicname: { type: String, required: true },
-  videoUrl: { type: String, required: true }
+  videoUrl: { type: String, required: true },
+  image: { type: String } // Added image field
 });
 
 const TopicSchema = new Schema<ITopic>({

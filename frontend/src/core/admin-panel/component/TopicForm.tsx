@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField } from '@mui/material';
 
-interface ModuleFormProps {
-  onSubmit: (moduleData: any) => void;
+interface TopicFormProps {
+  onSubmit: (topicData: any) => void;
 }
 
-const ModuleForm: React.FC<ModuleFormProps> = ({ onSubmit }) => {
+const TopicForm: React.FC<TopicFormProps> = ({ onSubmit }) => {
   const [title, setTitle] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -17,15 +17,15 @@ const ModuleForm: React.FC<ModuleFormProps> = ({ onSubmit }) => {
   return (
     <Box component="form" onSubmit={handleSubmit} mb={3}>
       <TextField
-        label="Module Title"
+        label="Topic Title"
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         fullWidth
         margin="normal"
       />
-      <Button type="submit" variant="contained" color="primary">Add Module</Button>
+      <Button type="submit" variant="contained" color="primary">Add Topic</Button>
     </Box>
   );
 };
 
-export default ModuleForm;
+export default TopicForm;

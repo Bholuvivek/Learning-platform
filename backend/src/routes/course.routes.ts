@@ -4,7 +4,7 @@ import { Course } from '../models/coursesModel';
 const router = Router();
 
 // Add Course
-router.post('/', async (req, res) => {
+router.post('/newCourse', async (req, res) => {
   const { title, image, imageUrl } = req.body;
   try {
     const newCourse = new Course({ title, image, imageUrl });

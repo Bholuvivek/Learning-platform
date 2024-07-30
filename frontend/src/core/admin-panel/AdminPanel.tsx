@@ -1,152 +1,149 @@
-// src/components/AdminPanel.tsx
-import React, { useState, useEffect } from 'react';
-import { Box, Button, Typography, Grid, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { fetchCourses, createCourse, updateCourse, deleteCourse, createModule, updateModule, deleteModule, createTopic, updateTopic, deleteTopic, createContent, updateContent, deleteContent } from '../../services/api';
+
+import { Box, Button, Typography, Paper} from '@mui/material';
+import ContentForm from './component/ContentForm';
 import CourseForm from './component/CourseForm';
 import ModuleForm from './component/ModuleForm';
-import { fetchCourses, deleteCourse, deleteModule  } from '../../services/api';
-import { Course,Module } from '../types';
+import TopicForm from './component/TopicForm';
 
 const AdminPanel: React.FC = () => {
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
-  const [selectedModule, setSelectedModule] = useState<Module | null>(null);
-  const [showCourseForm, setShowCourseForm] = useState(false);
-  const [showModuleForm, setShowModuleForm] = useState(false);
+  const [courses, setCourses] = useState<any[]>([]);
+  const [selectedCourse, setSelectedCourse] = useState<any | null>(null);
+  const [selectedModule, setSelectedModule] = useState<any | null>(null);
+  const [selectedTopic, setSelectedTopic] = useState<any | null>(null);
 
   useEffect(() => {
-    const loadCourses = async () => {
-      try {
-        const response = await fetchCourses();
-        setCourses(response.data);
-      } catch (error) {
-        console.error('Error fetching courses:', error);
-      }
-    };
-
-    loadCourses();
+    fetchCourses().then((response: { data: React.SetStateAction<any[]>; }) => setCourses(response.data));
   }, []);
 
-  const handleCourseClick = (course: Course) => {
-    setSelectedCourse(course);
-    setShowModuleForm(false);
+  const handleCreateCourse = async (courseData: any) => {
+    const response = await createCourse(courseData);
+    setCourses([...courses, response.data]);
   };
 
-  const handleModuleClick = (module: Module) => {
-    setSelectedModule(module);
-    setShowModuleForm(true);
-  };
-
-  const handleCourseFormClose = () => {
-    setShowCourseForm(false);
-    setSelectedCourse(null);
-  };
-
-  const handleModuleFormClose = () => {
-    setShowModuleForm(false);
-    setSelectedModule(null);
-  };
-
-  const handleCreateCourse = () => {
-    setShowCourseForm(true);
-    setSelectedCourse(null);
+  const handleUpdateCourse = async (courseId: string, courseData: any) => {
+    const response = await updateCourse(courseId, courseData);
+    setCourses(courses.map(course => course._id === courseId ? response.data : course));
   };
 
   const handleDeleteCourse = async (courseId: string) => {
-    try {
-      await deleteCourse(courseId);
-      setCourses(courses.filter(course => course._id !== courseId));
-    } catch (error) {
-      console.error('Error deleting course:', error);
+    await deleteCourse(courseId);
+    setCourses(courses.filter(course => course._id !== courseId));
+  };
+
+  const handleCreateModule = async (moduleData: any) => {
+    if (selectedCourse) {
+      const response = await createModule(selectedCourse._id, moduleData);
+      setSelectedCourse(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
     }
   };
 
-  const handleDeleteModule = async (courseId: string, moduleId: string) => {
-    try {
-      await deleteModule(courseId, moduleId);
-      setCourses(courses.map(course => {
-        if (course._id === courseId) {
-          return {
-            ...course,
-            modules: course.modules.filter(module => module._id !== moduleId),
-          };
-        }
-        return course;
-      }));
-    } catch (error) {
-      console.error('Error deleting module:', error);
+  const handleUpdateModule = async (moduleId: string, moduleData: any) => {
+    if (selectedCourse) {
+      const response = await updateModule(selectedCourse._id, moduleId, moduleData);
+      setSelectedCourse(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
+    }
+  };
+
+  const handleDeleteModule = async (moduleId: string) => {
+    if (selectedCourse) {
+      const response = await deleteModule(selectedCourse._id, moduleId);
+      setSelectedCourse(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
+    }
+  };
+
+  const handleCreateTopic = async (topicData: any) => {
+    if (selectedCourse && selectedModule) {
+      const response = await createTopic(selectedCourse._id, selectedModule._id, topicData);
+      setSelectedModule(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
+    }
+  };
+
+  const handleUpdateTopic = async (topicId: string, topicData: any) => {
+    if (selectedCourse && selectedModule) {
+      const response = await updateTopic(selectedCourse._id, selectedModule._id, topicId, topicData);
+      setSelectedModule(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
+    }
+  };
+
+  const handleDeleteTopic = async (topicId: string) => {
+    if (selectedCourse && selectedModule) {
+      const response = await deleteTopic(selectedCourse._id, selectedModule._id, topicId);
+      setSelectedModule(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
+    }
+  };
+
+  const handleCreateContent = async (contentData: any) => {
+    if (selectedCourse && selectedModule && selectedTopic) {
+      const response = await createContent(selectedCourse._id, selectedModule._id, selectedTopic._id, contentData);
+      setSelectedTopic(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
+    }
+  };
+
+  const handleUpdateContent = async (contentId: string, contentData: any) => {
+    if (selectedCourse && selectedModule && selectedTopic) {
+      const response = await updateContent(selectedCourse._id, selectedModule._id, selectedTopic._id, contentId, contentData);
+      setSelectedTopic(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
+    }
+  };
+
+  const handleDeleteContent = async (contentId: string) => {
+    if (selectedCourse && selectedModule && selectedTopic) {
+      const response = await deleteContent(selectedCourse._id, selectedModule._id, selectedTopic._id, contentId);
+      setSelectedTopic(response.data);
+      setCourses(courses.map(course => course._id === selectedCourse._id ? response.data : course));
     }
   };
 
   return (
-    <Box>
-      <Typography variant="h4" gutterBottom>
-        Admin Panel
-      </Typography>
-      <Button onClick={handleCreateCourse} variant="contained" color="primary">
-        Create Course
-      </Button>
-      <Grid container spacing={2} mt={2}>
-        {courses.map(course => (
-          <Grid item xs={12} sm={6} md={4} key={course._id}>
-            <Box border={1} padding={2} borderRadius={2}>
-              <Typography variant="h6">{course.title}</Typography>
-              <Button onClick={() => handleCourseClick(course)} variant="outlined" color="secondary">
-                Manage Modules
-              </Button>
-              <Button onClick={() => handleDeleteCourse(course._id)} variant="outlined" color="error">
-                Delete Course
-              </Button>
-              <Box mt={2}>
-                {course.modules.map(module => (
-                  <Box key={module._id} border={1} padding={2} borderRadius={2} mt={2}>
-                    <Typography variant="subtitle1">{module.title}</Typography>
-                    <Button onClick={() => handleModuleClick(module)} variant="outlined" color="secondary">
-                      Edit Module
-                    </Button>
-                    <Button onClick={() => handleDeleteModule(course._id, module._id)} variant="outlined" color="error">
-                      Delete Module
-                    </Button>
-                  </Box>
-                ))}
-              </Box>
-            </Box>
-          </Grid>
-        ))}
-      </Grid>
-
-      {/* Course Form Dialog */}
-      <Dialog open={showCourseForm} onClose={handleCourseFormClose}>
-        <DialogTitle>{selectedCourse ? 'Edit Course' : 'Create Course'}</DialogTitle>
-        <DialogContent>
-          <CourseForm course={selectedCourse!} onClose={handleCourseFormClose} onSuccess={() => {
-            handleCourseFormClose();
-            // Refetch courses or update state
-            fetchCourses().then(response => setCourses(response.data));
-          }} />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCourseFormClose} color="secondary">Close</Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Module Form Dialog */}
-      {selectedCourse && (
-        <Dialog open={showModuleForm} onClose={handleModuleFormClose}>
-          <DialogTitle>{selectedModule ? 'Edit Module' : 'Create Module'}</DialogTitle>
-          <DialogContent>
-            <ModuleForm courseId={selectedCourse._id} module={selectedModule!} onClose={handleModuleFormClose} onSuccess={() => {
-              handleModuleFormClose();
-              // Refetch courses or update state
-              fetchCourses().then(response => setCourses(response.data));
-            }} />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleModuleFormClose} color="secondary">Close</Button>
-          </DialogActions>
-        </Dialog>
-      )}
-    </Box>
-  );
+    <Box p={3}>
+      <Typography variant="h4" gutterBottom>Admin Panel</Typography>
+      <CourseForm onSubmit={handleCreateCourse} />
+      {courses.map(course => (
+        <Paper key={course._id} elevation={3} sx={{ p: 2, mb: 3 }}>
+          <Typography variant="h5" color="primary" gutterBottom>{course.title}</Typography>
+          <Button onClick={() => setSelectedCourse(course)}>Edit Course</Button>
+          <Button onClick={() => handleDeleteCourse(course._id)}>Delete Course</Button>
+          {selectedCourse && selectedCourse._id === course._id && (
+            <Box>
+              <ModuleForm onSubmit={handleCreateModule} />
+              {course.modules.map((module: any) => (
+                <Paper key={module._id} elevation={2} sx={{ p: 2, mb: 2 }}>
+                  <Typography variant="h6" color="secondary">{module.title}</Typography>
+                  <Button onClick={() => setSelectedModule(module)}>Edit Module</Button>
+                  <Button onClick={() => handleDeleteModule(module._id)}>Delete Module</Button>
+                  {selectedModule && selectedModule._id === module._id && (
+                    <Box>
+                      <TopicForm onSubmit={handleCreateTopic} />
+                      {module.topics.map((topic: any) => (
+                        <Paper key={topic._id} elevation={1} sx={{ p: 2, mb: 1 }}>
+                          <Typography variant="h6" color="textSecondary">{topic.title}</Typography>
+<Button onClick={() => setSelectedTopic(topic)}>Edit Topic</Button>
+<Button onClick={() => handleDeleteTopic(topic._id)}>Delete Topic</Button>
+{selectedTopic && selectedTopic._id === topic._id && (
+<ContentForm onSubmit={handleCreateContent} />
+)}
+</Paper>
+))}
+</Box>
+)}
+</Paper>
+))}
+</Box>
+)}
+</Paper>
+))}
+</Box>
+);
 };
 
 export default AdminPanel;
